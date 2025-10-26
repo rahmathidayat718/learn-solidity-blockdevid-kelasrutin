@@ -250,6 +250,19 @@ contract LiskGarden {
         }
         uint256 timeSincePlanted = block.timestamp - plant.plantedDate;
         GrowthStage oldStage = plant.stage;
+        if (oldStage == GrowthStage.SEED) {
+            oldStage = GrowthStage.SPROUT;
+            emit StageAdvanced(plantId, GrowthStage.SPROUT);
+        }
+        else if (oldStage == GrowthStage.SPROUT) {
+            oldStage = GrowthStage.GROWING;
+            emit StageAdvanced(plantId, GrowthStage.GROWING);
+        }
+        else if (oldStage == GrowthStage.GROWING) {
+            oldStage = GrowthStage.BLOOMING;
+            emit StageAdvanced(plantId, GrowthStage.BLOOMING);
+        }
+        
 
     }
 
